@@ -1,17 +1,29 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app">
+    <header>
+      <nav>
+        <router-link to="/">Ranking</router-link>
+      </nav>
+      
+    </header>
+    <div class="calculate-container">
+        <button @click="calculate" class="calculate-button">Calculate</button>
+      </div>
+    <main>
+      <router-view></router-view>
+    </main>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import { calculate } from './utils/calculate';
 
 export default {
   name: 'App',
-  components: {
-    HelloWorld
+  methods: {
+    calculate
   }
-}
+};
 </script>
 
 <style>
@@ -22,5 +34,45 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+header {
+  background-color: #42b983;
+  padding: 20px;
+  color: white;
+  margin-bottom: 20px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  margin: 0 15px;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+main {
+  padding: 20px;
+}
+
+.calculate-container {
+  margin-top: 30px;
+}
+
+.calculate-button {
+  padding: 20px 40px;
+  font-size: 24px;
+  color: white;
+  background-color: #42b983;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.calculate-button:hover {
+  background-color: #36a372;
 }
 </style>
