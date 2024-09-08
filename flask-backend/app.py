@@ -75,7 +75,17 @@ def get_calculate():
     print(input_games)
     games, summary = calculate_rankings_wo_export(input_games, 2024, 'mixed', '2024-08-24')
     print(summary)
-    return jsonify({'message': 'ahello'})
+    
+    result = []
+    for index, row in summary.iterrows():
+        print(f'row:{row}')
+        team = {
+            "Idx": index,
+            "Team": row.Team,
+            "Rating_USAU": row.Rating_USAU,
+        }
+        result.append(team)
+    return jsonify(result)
 
 if __name__ == '__main__':
     app.run(debug=True)

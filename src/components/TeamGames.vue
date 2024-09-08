@@ -1,4 +1,5 @@
 <template>
+    <TeamGamesModified/>
     <div>
       <h1>Games for {{ teamName }}</h1>
       <button @click="clearLocalStorage">Clear Local Storage</button>
@@ -33,7 +34,7 @@
               <input 
                 v-model="game.Score_1" 
                 type="number" 
-                style="width: 50px;"
+                style="width: 35px;"
                 @blur="saveScore(game)"
                 ref="scoreSelected"
               >
@@ -41,7 +42,7 @@
               <input 
                 v-model="game.Score_2" 
                 type="number" 
-                style="width: 50px;"
+                style="width: 35px;"
                 @blur="saveScore(game)"
                 ref="scoreOpponent"
               >
@@ -59,7 +60,13 @@
   </template>
   
   <script>
+import TeamGamesModified from './TeamGamesModified.vue';
+import { mapActions } from 'vuex';
+
   export default {
+    components: {
+      TeamGamesModified,
+    },
     props: ['teamName'],
     data() {
       return {
@@ -68,7 +75,6 @@
     },
     created() {
       this.fetchTeamGames();
-
     },
     watch: {
         $route(to, from) {
@@ -124,6 +130,8 @@
     },
     saveGame(game){
       localStorage.setItem('game:'.concat(String(game.Id_Game)), JSON.stringify(game));
+      this.saveUpdateGame(game)
+
     },  
     handleClickOutside(event) {
       this.games.forEach(game => {
@@ -141,7 +149,12 @@
           }
         }
       });
-    }
+    },
+    ...mapActions(['updateGame']),
+    saveUpdateGame(game) {
+      console.log('updating game TG')
+      this.updateGame(game);
+    },
   }
 };
 

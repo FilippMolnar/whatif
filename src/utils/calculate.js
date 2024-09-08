@@ -13,7 +13,6 @@ export async function calculate() {
                 game.Score_1 = game.Score_2; 
                 game.Score_2 = s1; 
             }
-            const isTeam1 = game.Team1 !== game.Opponent;
             const entry = {
                 "Team_1": game.Team_1,
                 "Team_2": game.Team_2,
@@ -39,6 +38,7 @@ export async function calculate() {
         });
         
         const data = await response.json();
+        console.log(data)
         return data;
       } catch (error) {
         console.error('Error fetching team data:', error);
